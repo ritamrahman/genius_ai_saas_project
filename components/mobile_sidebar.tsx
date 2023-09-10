@@ -4,8 +4,20 @@ import { Menu } from "lucide-react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Sidebar } from "./sidebar";
+import { useEffect, useState } from "react";
 
 export default function MobileSidebar() {
+  // fix hidration errors
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
+
   return (
     <Sheet>
       {/* mobile button */}
@@ -16,7 +28,7 @@ export default function MobileSidebar() {
       </SheetTrigger>
 
       {/* sidebar */}
-      <SheetContent side="left" className="p-0 overflow-y-scroll">
+      <SheetContent side="left" className="p-0">
         <Sidebar />
       </SheetContent>
     </Sheet>
